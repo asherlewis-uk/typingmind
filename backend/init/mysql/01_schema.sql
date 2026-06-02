@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS typingmind CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE typingmind;
+CREATE DATABASE IF NOT EXISTS nexumchat CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE nexumchat;
 
 -- Blob metadata (files uploaded by users)
 CREATE TABLE blobs (

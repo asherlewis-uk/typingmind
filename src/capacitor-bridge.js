@@ -1,5 +1,5 @@
 /**
- * TypingMind Native Bridge
+ * NexumChat Native Bridge
  * Full Capacitor plugin integration for gestures, haptics, and native interactions
  * Uses Capacitor.Plugins globals — works in native webview without a bundler
  */

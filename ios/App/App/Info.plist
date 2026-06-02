@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>TypingMind</string>
+        <string>NexumChat</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -39,19 +39,19 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>TypingMind needs camera access to take photos for uploads.</string>
+	<string>NexumChat needs camera access to take photos for uploads.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>TypingMind uses your location for relevant context features.</string>
+	<string>NexumChat uses your location for relevant context features.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>TypingMind uses your location for relevant context features.</string>
+	<string>NexumChat uses your location for relevant context features.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>TypingMind needs photo library access to upload images.</string>
+	<string>NexumChat needs photo library access to upload images.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>TypingMind needs permission to save images to your photo library.</string>
+	<string>NexumChat needs permission to save images to your photo library.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>TypingMind needs microphone access for voice input features.</string>
+	<string>NexumChat needs microphone access for voice input features.</string>
 	<key>NSUserNotificationUsageDescription</key>
-	<string>TypingMind sends you notifications for important updates.</string>
+	<string>NexumChat sends you notifications for important updates.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -61,10 +61,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.asherlewis.typingmind</string>
+			<string>com.asherlewis.nexumchat</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>typingmind</string>
+				<string>nexumchat</string>
 			</array>
 		</dict>
 	</array>

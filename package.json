@@ -9,11 +9,11 @@
     "cap:open:ios": "npx cap open ios",
     "cap:open:android": "npx cap open android"
   },
-  "name": "typingmind",
+  "name": "nexumchat",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:TypingMind/typingmind.git",
-  "author": "Tony Dinh <support@typingmind.com>",
+  "repository": "git@github.com:NexumChat/nexumchat.git",
+  "author": "Tony Dinh <support@nexumchat.com>",
   "license": "N/A",
   "devDependencies": {
     "http-server": "^14.1.1"

@@ -1,7 +1,7 @@
 {
-  "name": "typingmind-backend",
+  "name": "nexumchat-backend",
   "version": "1.0.0",
-  "description": "Self-hosted TypingMind backend API",
+  "description": "Self-hosted NexumChat backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

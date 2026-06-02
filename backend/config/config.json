@@ -1,8 +1,8 @@
 {
   "hosted": false,
   "managed": false,
-  "brand": "TypingMind",
-  "tagline": "Self-hosted AI Workspace",
+  "brand": "NexumChat",
+  "tagline": "AI Workspace",
   "logoURL": "/assets/logo.png",
   "allowUserAPIKey": true,
   "allowAnonymousUse": true,
@@ -53,13 +53,13 @@
     "fileUploadMaxTokens": 2000000
   },
   "links": {
-    "docs": "https://docs.typingmind.com",
-    "changelog": "https://docs.typingmind.com/changelog",
+    "docs": "",
+    "changelog": "",
     "privacy": "/privacy",
     "reportBug": "/report-bug"
   },
   "licenseServerConfig": {
-    "recoverLink": "/license",
-    "manageLink": "/license"
+    "recoverLink": "",
+    "manageLink": ""
   }
 }

@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-# TypingMind Self-Hosted Setup Script
+# NexumChat Self-Hosted Setup Script
 # Run after first `docker compose up -d --build`
 
-echo "=== TypingMind Self-Hosted Setup ==="
+echo "=== NexumChat Self-Hosted Setup ==="
 
 # Load environment
 if [ -f .env.local ]; then
@@ -13,7 +13,7 @@ elif [ -f .env ]; then
   export $(grep -v '^#' .env | xargs)
 fi
 
-DOMAIN=${DOMAIN:-typingmind.yourdomain.com}
+DOMAIN=${DOMAIN:-nexumchat.yourdomain.com}
 
 echo ""
 echo "Waiting for services to be healthy..."
@@ -32,11 +32,11 @@ fi
 # Check databases
 echo ""
 echo "Checking MySQL..."
-docker compose exec -T mysql mysql -u typingmind -p"${MYSQL_PASSWORD}" -e "SELECT 1" typingmind >/dev/null 2>&1 && echo "MySQL OK" || echo "MySQL not ready yet (this is normal on first boot)"
+docker compose exec -T mysql mysql -u nexumchat -p"${MYSQL_PASSWORD}" -e "SELECT 1" nexumchat >/dev/null 2>&1 && echo "MySQL OK" || echo "MySQL not ready yet (this is normal on first boot)"
 
 echo ""
 echo "Checking PostgreSQL..."
-docker compose exec -T postgres psql -U typingmind -c "SELECT 1" >/dev/null 2>&1 && echo "PostgreSQL OK" || echo "PostgreSQL not ready yet (this is normal on first boot)"
+docker compose exec -T postgres psql -U nexumchat -c "SELECT 1" >/dev/null 2>&1 && echo "PostgreSQL OK" || echo "PostgreSQL not ready yet (this is normal on first boot)"
 
 echo ""
 echo "Checking MinIO..."

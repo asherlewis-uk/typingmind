@@ -5,20 +5,22 @@ services:
     image: caddy:2-alpine
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8081:80"
+      - "127.0.0.1:8082:80"
       - "127.0.0.1:8444:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./src:/var/www/typingmind/src:ro
-      - ./config:/var/www/typingmind/config:ro
+      - ./src:/var/www/nexumchat/src:ro
+      - ./config:/var/www/nexumchat/config:ro
       - caddy_data:/data
       - caddy_config:/config
     networks:
-      - typingmind
+      - nexumchat
 
   api:
     build: ./api
     restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - NODE_ENV=production
       - PORT=3000
@@ -27,51 +29,54 @@ services:
       - MINIO_ENDPOINT=http://minio:9000
       - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
       - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
-      - MINIO_BUCKET=typingmind
-      - OLLAMA_HOST=http://ollama:11434
+      - MINIO_BUCKET=nexumchat
+      - EMBEDDING_HOST=http://ollama:11434
+      - EMBEDDING_MODEL=nomic-embed-text
+      - TTS_HOST=http://voice:8000
+      - TTS_VOICE=piper-lessac
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
-      - MYSQL_USER=typingmind
+      - MYSQL_USER=nexumchat
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_DATABASE=typingmind
+      - MYSQL_DATABASE=nexumchat
       - PG_HOST=postgres
       - PG_PORT=5432
-      - PG_USER=typingmind
+      - PG_USER=nexumchat
       - PG_PASSWORD=${PG_PASSWORD}
-      - PG_DATABASE=typingmind
+      - PG_DATABASE=nexumchat
     depends_on:
       - mysql
       - postgres
       - minio
     networks:
-      - typingmind
+      - nexumchat
 
   mysql:
     image: mysql:8
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: typingmind
-      MYSQL_USER: typingmind
+      MYSQL_DATABASE: nexumchat
+      MYSQL_USER: nexumchat
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
       - ./init/mysql:/docker-entrypoint-initdb.d:ro
     networks:
-      - typingmind
+      - nexumchat
 
   postgres:
     image: pgvector/pgvector:pg15
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
-      POSTGRES_DB: typingmind
-      POSTGRES_USER: typingmind
+      POSTGRES_DB: nexumchat
+      POSTGRES_USER: nexumchat
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init/postgres:/docker-entrypoint-initdb.d:ro
     networks:
-      - typingmind
+      - nexumchat
 
   minio:
     image: minio/minio
@@ -83,15 +88,32 @@ services:
     volumes:
       - minio_data:/data
     networks:
-      - typingmind
+      - nexumchat
+
+  voice:
+    build: ./voice
+    restart: unless-stopped
+    volumes:
+      - /home/asher/hermes-voice/models:/app/models:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=
+    networks:
+      - nexumchat
 
 networks:
-  typingmind:
-    driver: bridge
+  nexumchat:
+    external: true
+    name: nexumchat-selfhosted_nexumchat
 
 volumes:
   caddy_data:
   caddy_config:
   mysql_data:
+    external: true
+    name: nexumchat-selfhosted_mysql_data
   postgres_data:
+    external: true
+    name: nexumchat-selfhosted_postgres_data
   minio_data:
+    external: true
+    name: nexumchat-selfhosted_minio_data

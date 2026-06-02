@@ -1,12 +1,12 @@
 openapi: 3.0.3
 info:
-  title: TypingMind API Documentation
+  title: NexumChat API Documentation
   version: 1.2.0
   description: "
     <h5 class='mt-8 mb-2'><b>API Hosts:</b></h5>
     <ol class='list-decimal mt-2'>
-      <li>For US instances: <code>https://api.typingmind.com</code></li>
-      <li>For EU instances: <code>https://api.eu.typingmind.com</code></li>
+      <li>For US instances: <code>https://api.nexumchat.com</code></li>
+      <li>For EU instances: <code>https://api.eu.nexumchat.com</code></li>
     </ol>
     <h5 class='mt-8 mb-2'><b>How to use the API:</b></h5>
     <ol class='list-decimal mt-2'>
@@ -16,7 +16,7 @@ info:
   "
 
 servers:
-  - url: https://api.typingmind.com/api
+  - url: https://api.nexumchat.com/api
 
 tags:
   - name: Users V2

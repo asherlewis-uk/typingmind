@@ -10,16 +10,16 @@ const { Readable } = require('stream');
 
 // ─── Configuration ───────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
-const DOMAIN = process.env.DOMAIN || 'typingmind.yourdomain.com';
+const DOMAIN = process.env.DOMAIN || 'nexumchat.yourdomain.com';
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || '';
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY || '';
 
 const MYSQL_CONFIG = {
   host: process.env.MYSQL_HOST || 'mysql',
   port: parseInt(process.env.MYSQL_PORT || '3306', 10),
-  user: process.env.MYSQL_USER || 'typingmind',
+  user: process.env.MYSQL_USER || 'nexumchat',
   password: process.env.MYSQL_PASSWORD || 'change-me-db-123',
-  database: process.env.MYSQL_DATABASE || 'typingmind',
+  database: process.env.MYSQL_DATABASE || 'nexumchat',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -28,9 +28,9 @@ const MYSQL_CONFIG = {
 const PG_CONFIG = {
   host: process.env.PG_HOST || 'postgres',
   port: parseInt(process.env.PG_PORT || '5432', 10),
-  user: process.env.PG_USER || 'typingmind',
+  user: process.env.PG_USER || 'nexumchat',
   password: process.env.PG_PASSWORD || 'change-me-pg-123',
-  database: process.env.PG_DATABASE || 'typingmind',
+  database: process.env.PG_DATABASE || 'nexumchat',
   max: 10,
 };
 
@@ -38,11 +38,11 @@ const MINIO_CONFIG = {
   endPoint: new URL(process.env.MINIO_ENDPOINT || 'http://minio:9000').hostname,
   port: parseInt(new URL(process.env.MINIO_ENDPOINT || 'http://minio:9000').port || '9000', 10),
   useSSL: (process.env.MINIO_ENDPOINT || 'http://minio:9000').startsWith('https'),
-  accessKey: process.env.MINIO_ACCESS_KEY || 'minio-typingmind',
+  accessKey: process.env.MINIO_ACCESS_KEY || 'minio-nexumchat',
   secretKey: process.env.MINIO_SECRET_KEY || 'change-me-minio-123',
 };
 
-const MINIO_BUCKET = process.env.MINIO_BUCKET || 'typingmind';
+const MINIO_BUCKET = process.env.MINIO_BUCKET || 'nexumchat';
 
 // ─── Database Clients ────────────────────────────────────────────────────────
 let mysqlPool;
@@ -233,65 +233,59 @@ fastify.get('/api/hosted/blobs/:blobID', async (request, reply) => {
 // 2. VOICE / TTS PROXY
 // ═══════════════════════════════════════════════════════════════════════════════
 
+// ─── Local TTS (Hermes Voice / Piper) ──────────────────────────────────────
+const TTS_HOST = process.env.TTS_HOST || 'http://voice:8000';
+
 // POST /api/hosted/voice/openai
 fastify.post('/api/hosted/voice/openai', async (request, reply) => {
-  if (!OPENAI_API_KEY) {
-    reply.status(503);
-    return userMessageReply('OpenAI API key not configured');
-  }
-
   try {
-    const response = await fetch('https://api.openai.com/v1/audio/speech', {
+    const { input: text, voice: _voice } = request.body || {};
+
+    if (!text) {
+      reply.status(400);
+      return userMessageReply('input text is required');
+    }
+
+    const formData = new FormData();
+    formData.append('text', text);
+
+    const response = await fetch(`${TTS_HOST}/speak`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify(request.body),
+      body: formData,
     });
 
     if (!response.ok) {
-      const text = await response.text();
+      const errText = await response.text();
       reply.status(response.status);
-      return userMessageReply(`OpenAI TTS error: ${text}`);
+      return userMessageReply(`TTS error: ${errText}`);
     }
 
+    // Hermes voice returns audio/wav; NexumChat frontend expects audio/mpeg from OpenAI
+    // Convert content type so frontend plays it correctly
+    const audioBuffer = Buffer.from(await response.arrayBuffer());
     reply.header('Content-Type', 'audio/mpeg');
-    return reply.send(Readable.fromWeb(response.body));
+    reply.header('Content-Length', audioBuffer.length);
+    return reply.send(audioBuffer);
   } catch (err) {
     request.log.error(err);
     reply.status(500);
-    return userMessageReply('TTS proxy failed');
+    return userMessageReply('TTS proxy failed: ' + (err.message || 'unknown error'));
   }
 });
 
 // GET /api/hosted-users/voice/voices
 fastify.get('/api/hosted-users/voice/voices', async (request, reply) => {
-  if (!ELEVENLABS_API_KEY) {
-    reply.status(503);
-    return userMessageReply('ElevenLabs API key not configured');
-  }
-
-  try {
-    const response = await fetch('https://api.elevenlabs.io/v1/voices', {
-      headers: {
-        'xi-api-key': ELEVENLABS_API_KEY,
+  // Return local Hermes Voice models — no external API call needed
+  return {
+    voices: [
+      {
+        voice_id: 'piper-lessac',
+        name: 'Lessac (Piper)',
+        category: 'local',
+        description: 'Local Piper TTS — en_US-lessac-medium',
       },
-    });
-
-    if (!response.ok) {
-      const text = await response.text();
-      reply.status(response.status);
-      return userMessageReply(`ElevenLabs error: ${text}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    request.log.error(err);
-    reply.status(500);
-    return userMessageReply('Voice list proxy failed');
-  }
+    ],
+  };
 });
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -471,30 +465,28 @@ fastify.get('/api/shared_plugins/:id', async (request, reply) => {
 // 4. KNOWLEDGE BASE (RAG)
 // ═══════════════════════════════════════════════════════════════════════════════
 
-async function getEmbedding(text) {
-  if (!OPENAI_API_KEY) {
-    throw new Error('OpenAI API key not configured');
-  }
+const EMBEDDING_HOST = process.env.EMBEDDING_HOST || 'http://ollama:11434';
+const EMBEDDING_MODEL = process.env.EMBEDDING_MODEL || 'nomic-embed-text';
 
-  const response = await fetch('https://api.openai.com/v1/embeddings', {
+async function getEmbedding(text) {
+  const response = await fetch(`${EMBEDDING_HOST}/api/embeddings`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${OPENAI_API_KEY}`,
     },
     body: JSON.stringify({
-      model: 'text-embedding-3-small',
-      input: text,
+      model: EMBEDDING_MODEL,
+      prompt: text,
     }),
   });
 
   if (!response.ok) {
-    const text = await response.text();
-    throw new Error(`Embedding API error: ${text}`);
+    const errText = await response.text();
+    throw new Error(`Embedding API error: ${errText}`);
   }
 
   const data = await response.json();
-  return data.data[0].embedding;
+  return data.embedding;
 }
 
 // POST /api/cloud/knowledge/query

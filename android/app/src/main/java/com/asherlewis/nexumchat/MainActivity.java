@@ -1,4 +1,4 @@
-package com.asherlewis.typingmind;
+package com.asherlewis.nexumchat;
 
 import com.getcapacitor.BridgeActivity;
 

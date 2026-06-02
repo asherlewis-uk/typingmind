@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">TypingMind</string>
-    <string name="title_activity_main">TypingMind</string>
-    <string name="package_name">com.asherlewis.typingmind</string>
-    <string name="custom_url_scheme">com.asherlewis.typingmind</string>
+    <string name="app_name">NexumChat</string>
+    <string name="title_activity_main">NexumChat</string>
+    <string name="package_name">com.asherlewis.nexumchat</string>
+    <string name="custom_url_scheme">com.asherlewis.nexumchat</string>
 </resources>

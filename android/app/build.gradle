@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = "com.asherlewis.typingmind"
+    namespace = "com.asherlewis.nexumchat"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.asherlewis.typingmind"
+        applicationId "com.asherlewis.nexumchat"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,6 +1,6 @@
 {
-  "appId": "com.asherlewis.typingmind",
-  "appName": "TypingMind",
+  "appId": "com.asherlewis.nexumchat",
+  "appName": "NexumChat",
   "webDir": "src",
   "bundledWebRuntime": false,
   "server": {
@@ -46,7 +46,7 @@
   },
   "ios": {
     "contentInset": "always",
-    "scheme": "TypingMind",
+    "scheme": "NexumChat",
     "backgroundColor": "#0f0f0f",
     "preferredContentMode": "mobile",
     "limitsNavigationsToAppBoundDomains": false,

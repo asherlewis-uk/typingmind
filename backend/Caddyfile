@@ -1,10 +1,10 @@
 :80 {
-    root * /var/www/typingmind/src
+    root * /var/www/nexumchat/src
     file_server
     encode gzip
 
     handle /config.json {
-        root * /var/www/typingmind/config
+        root * /var/www/nexumchat/config
         file_server
     }
 
