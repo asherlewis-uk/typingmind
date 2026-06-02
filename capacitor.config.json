@@ -1,6 +1,6 @@
 {
   "appId": "com.asherlewis.nexumchat",
-  "appName": "NexumChat",
+  "appName": "nexumChat",
   "webDir": "src",
   "bundledWebRuntime": false,
   "server": {
@@ -46,7 +46,7 @@
   },
   "ios": {
     "contentInset": "always",
-    "scheme": "NexumChat",
+    "scheme": "nexumchat",
     "backgroundColor": "#0f0f0f",
     "preferredContentMode": "mobile",
     "limitsNavigationsToAppBoundDomains": false,
