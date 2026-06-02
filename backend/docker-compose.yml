@@ -5,12 +5,12 @@ services:
     image: caddy:2-alpine
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8082:80"
+      - "8082:80"
       - "127.0.0.1:8444:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./src:/var/www/nexumchat/src:ro
-      - ./config:/var/www/nexumchat/config:ro
+      - /home/asher/typingmind/src:/var/www/nexumchat/src:ro
+      - /home/asher/typingmind/config:/var/www/nexumchat/config:ro
       - caddy_data:/data
       - caddy_config:/config
     networks:
@@ -102,18 +102,18 @@ services:
 
 networks:
   nexumchat:
-    external: true
-    name: nexumchat-selfhosted_nexumchat
+    # external: true
+    # name: typingmind-selfhosted_typingmind
 
 volumes:
   caddy_data:
   caddy_config:
   mysql_data:
-    external: true
-    name: nexumchat-selfhosted_mysql_data
+    # external: true
+    # name: typingmind-selfhosted_mysql_data
   postgres_data:
-    external: true
-    name: nexumchat-selfhosted_postgres_data
+    # external: true
+    # name: typingmind-selfhosted_postgres_data
   minio_data:
-    external: true
-    name: nexumchat-selfhosted_minio_data
+    # external: true
+    # name: typingmind-selfhosted_minio_data
