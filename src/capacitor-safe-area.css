@@ -1,0 +1,101 @@
+/* Capacitor Mobile Safe Area & Gesture Optimizations */
+
+:root {
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+}
+
+html, body {
+  /* Prevent rubber-banding and overscroll on mobile */
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+  /* Smooth scrolling with momentum */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent text selection on UI elements */
+  -webkit-user-select: none;
+  user-select: none;
+  /* Prevent callout menu on long-press */
+  -webkit-touch-callout: none;
+  /* Optimize tap highlighting */
+  -webkit-tap-highlight-color: transparent;
+  /* Prevent font size adjustment on orientation change */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Allow text selection in contenteditable and input elements */
+input, textarea, [contenteditable] {
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
+/* Safe area padding for notched devices */
+.safe-area-top {
+  padding-top: var(--safe-area-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: var(--safe-area-bottom);
+}
+
+.safe-area-horizontal {
+  padding-left: var(--safe-area-left);
+  padding-right: var(--safe-area-right);
+}
+
+/* Status bar spacer for iOS */
+.status-bar-spacer {
+  height: var(--safe-area-top);
+  background: inherit;
+}
+
+/* Bottom navigation spacer for home indicator */
+.home-indicator-spacer {
+  height: var(--safe-area-bottom);
+  background: inherit;
+}
+
+/* Touch-friendly minimum sizes */
+.touch-min {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Disable pull-to-refresh on main container */
+.capacitor-no-pull-refresh {
+  overscroll-behavior-y: none;
+}
+
+/* Smooth page transitions */
+.page-transition {
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+/* Keyboard-aware spacing */
+.keyboard-open body {
+  padding-bottom: env(keyboard-inset-height, 0px);
+}
+
+/* iOS momentum scrolling for containers */
+.scroll-momentum {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+/* Prevent zoom on input focus for iOS */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+textarea {
+  font-size: 16px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
