@@ -1,0 +1,22 @@
+:80 {
+    root * /var/www/typingmind/src
+    file_server
+    encode gzip
+
+    handle /config.json {
+        root * /var/www/typingmind/config
+        file_server
+    }
+
+    handle /health {
+        reverse_proxy api:3000
+    }
+
+    handle /api/* {
+        reverse_proxy api:3000
+    }
+
+    handle {
+        try_files {path} /index.html
+    }
+}

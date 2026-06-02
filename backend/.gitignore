@@ -1,0 +1,6 @@
+.env
+mysql_data/
+postgres_data/
+minio_data/
+caddy_data/
+caddy_config/
