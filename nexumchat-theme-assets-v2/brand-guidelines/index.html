@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexumChat Brand Guidelines</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0c14; --bg-alt: #0f121c; --card: #19212d;
+    --text: #ffffff; --text-secondary: #8b92a8;
+    --blue: #508cff; --purple: #b464ff; --coral: #ff7864;
+    --mint: #64ffb4; --gold: #ffc850; --border: #283246;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+  h1 { font-size: 2.5rem; margin-bottom: 10px;
+       background: linear-gradient(135deg, var(--blue), var(--purple), var(--coral));
+       -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  h2 { font-size: 1.4rem; margin: 40px 0 18px; color: var(--blue); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  h3 { font-size: 1.05rem; margin: 25px 0 10px; color: var(--purple); }
+  .subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 30px; }
+  .gradient-bar { height: 40px; border-radius: 8px; margin: 20px 0;
+    background: linear-gradient(135deg, var(--blue), var(--purple), var(--coral)); }
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 18px 0; }
+  .color-swatch { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .color-preview { height: 70px; }
+  .color-info { padding: 10px; background: var(--card); }
+  .color-name { font-weight: 600; font-size: 0.85rem; }
+  .color-hex { color: var(--text-secondary); font-size: 0.75rem; font-family: monospace; margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.88rem; }
+  th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--blue); font-weight: 600; background: var(--bg-alt); }
+  td { color: var(--text-secondary); }
+  tr:hover td { color: var(--text); }
+  code { background: var(--card); padding: 2px 8px; border-radius: 4px; font-family: 'SF Mono', monospace; font-size: 0.82rem; }
+  pre { background: var(--card); padding: 15px; border-radius: 8px; margin: 15px 0; overflow-x: auto; border: 1px solid var(--border); }
+  pre code { background: transparent; padding: 0; }
+  .note { background: rgba(80,140,255,0.08); border-left: 3px solid var(--blue); padding: 12px 15px; margin: 15px 0; border-radius: 0 8px 8px 0; font-size: 0.88rem; color: var(--text-secondary); }
+  .warning { background: rgba(255,120,100,0.08); border-left: 3px solid var(--coral); }
+  .success { background: rgba(100,255,180,0.08); border-left: 3px solid var(--mint); }
+  ul, ol { margin: 10px 0 10px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+  li { margin: 4px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>nexumChat</h1>
+<p class="subtitle">Complete Brand Asset Package &mdash; Version 2</p>
+<div class="gradient-bar"></div>
+
+<h2>1. Brand Identity</h2>
+<p><strong>Tagline:</strong> "Connect any model. Orchestrate everything."</p>
+<p>The nexumChat identity centers on a <strong>connected-node "N" mark</strong> representing neural networks, orchestration, and the hub-and-spoke architecture of the platform. The gradient flows blue (models) through purple (agents) to coral (workflows).</p>
+
+<h2>2. Color Palette</h2>
+<h3>Foundation</h3>
+<div class="color-grid">
+  <div class="color-swatch"><div class="color-preview" style="background:#0a0c14"></div><div class="color-info"><div class="color-name">Dark BG</div><div class="color-hex">#0A0C14</div></div></div>
+  <div class="color-swatch"><div class="color-preview" style="background:#0f121c"></div><div class="color-info"><div class="color-name">Dark Alt</div><div class="color-hex">#0F121C</div></div></div>
+  <div class="color-swatch"><div class="color-preview" style="background:#19212d"></div><div class="color-info"><div class="color-name">Card</div><div class="color-hex">#19212D</div></div></div>
+  <div class="color-swatch"><div class="color-preview" style="background:#ffffff"></div><div class="color-info"><div class="color-name">White</div><div class="color-hex">#FFFFFF</div></div></div>
+</div>
+
+<h3>Accents</h3>
+<div class="color-grid">
+  <div class="color-swatch"><div class="color-preview" style="background:#508cff"></div><div class="color-info"><div class="color-name">Blue</div><div class="color-hex">#508CFF</div></div></div>
+  <div class="color-swatch"><div class="color-preview" style="background:#b464ff"></div><div class="color-info"><div class="color-name">Purple</div><div class="color-hex">#B464FF</div></div></div>
+  <div class="color-swatch"><div class="color-preview" style="background:#ff7864"></div><div class="color-info"><div class="color-name">Coral</div><div class="color-hex">#FF7864</div></div></div>
+  <div class="color-swatch"><div class="color-preview" style="background:#64ffb4"></div><div class="color-info"><div class="color-name">Mint</div><div class="color-hex">#64FFB4</div></div></div>
+  <div class="color-swatch"><div class="color-preview" style="background:#ffc850"></div><div class="color-info"><div class="color-name">Gold</div><div class="color-hex">#FFC850</div></div></div>
+</div>
+
+<h3>Signature Gradient</h3>
+<div class="gradient-bar"></div>
+<pre><code>background: linear-gradient(135deg, #508CFF, #B464FF, #FF7864);</code></pre>
+
+<h2>3. Complete Asset Inventory</h2>
+<table>
+<tr><th>Category</th><th>Files</th><th>Destination</th></tr>
+<tr><td>web-favicons/</td><td>9 + 1 ICO</td><td>src/</td></tr>
+<tr><td>pwa-manifest-icons/</td><td>12</td><td>src/</td></tr>
+<tr><td>marketing-images/</td><td>10</td><td>src/</td></tr>
+<tr><td>ios-appicon/</td><td>1 (1024x1024)</td><td>ios/App/Assets.xcassets/AppIcon.appiconset/</td></tr>
+<tr><td>ios-splash/</td><td>3 (2732x2732)</td><td>ios/App/Assets.xcassets/Splash.imageset/</td></tr>
+<tr><td>ios-capacitor-splash/</td><td>48 + source</td><td>src/splash_screens/</td></tr>
+<tr><td>android-icons/</td><td>15 PNG + 2 XML</td><td>android/app/src/main/res/mipmap-*/</td></tr>
+<tr><td>android-splash/</td><td>11</td><td>android/app/src/main/res/drawable*/</td></tr>
+<tr><td>white-label-assets/</td><td>7</td><td>src/assets/white-label/</td></tr>
+<tr><td>landing-page/features/</td><td>16</td><td>src/assets/landing-page/</td></tr>
+<tr><td>landing-page/plugins/</td><td>6</td><td>src/assets/landing-page/plugins/</td></tr>
+<tr><td>landing-page/decorative/</td><td>9</td><td>src/assets/</td></tr>
+<tr><td>landing-page/trust-badges/</td><td>12</td><td>src/assets/</td></tr>
+<tr><td>onboarding/</td><td>7</td><td>src/assets/onboarding/</td></tr>
+<tr><td>providers/</td><td>11</td><td>src/assets/providers/</td></tr>
+<tr><td>oauth-logos/</td><td>6</td><td>src/assets/oauth-logos/</td></tr>
+<tr><td>ai-characters/</td><td>27</td><td>src/assets/ai-characters/</td></tr>
+<tr><td>custom-system-themes/</td><td>11</td><td>src/assets/custom-system-themes/</td></tr>
+<tr><td>announcements/</td><td>7</td><td>src/assets/announcements/</td></tr>
+</table>
+
+<h2>4. Master Source Assets</h2>
+<p>These files are the canonical sources. All other assets are derived from these:</p>
+<table>
+<tr><th>Master Source</th><th>Generates</th><th>Command</th></tr>
+<tr><td><code>ios-appicon/AppIcon-512@2x.png</code></td><td>iOS all icon sizes</td><td>Automatic (Xcode)</td></tr>
+<tr><td><code>ios-capacitor-splash/icon.png</code></td><td>All 48 iOS splash screens</td><td><code>npx pwa-asset-generator icon.png src/splash_screens/ --splash-only</code></td></tr>
+<tr><td><code>marketing-images/logo.png</code></td><td>Web favicons, Android icons</td><td><code>npx pwa-asset-generator logo.png --favicon --manifest</code></td></tr>
+<tr><td><code>android-splash/drawable/splash.png</code></td><td>All density splashes</td><td><code>npx cap sync</code></td></tr>
+</table>
+
+<h2>5. Deployment Checklist</h2>
+<ol>
+<li><strong>Config text updates:</strong> manifest.json, browserconfig.xml, index.html, capacitor.config.json, build.gradle, Info.plist, project.pbxproj, package.json</li>
+<li><strong>Copy core assets:</strong> favicons, PWA icons, marketing images to <code>src/</code></li>
+<li><strong>iOS:</strong> Copy AppIcon-512@2x.png to xcassets, copy splash screens</li>
+<li><strong>Android:</strong> Copy mipmap-* and drawable-* resources</li>
+<li><strong>Regenerate:</strong> Run <code>npx cap sync</code> to propagate splash screens</li>
+<li><strong>White-label:</strong> Copy to <code>src/assets/white-label/</code></li>
+<li><strong>Verify:</strong> Check all manifest paths resolve, no stale brand text remains</li>
+</ol>
+
+<div class="note success">
+<strong>229 total files</strong> in this package covering all 16 asset categories identified in the canonical inventory.
+</div>
+
+</div>
+</body>
+</html>
